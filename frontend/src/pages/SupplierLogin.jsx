@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const SupplierLogin = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -39,7 +39,7 @@ const Login = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black to-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 bg-gradient-to-r from-gray-700 to-black p-8 rounded-2xl shadow-slate-500 shadow-2xl">
                 <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold">Sign in to your account</h2>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold">Supplier Sign in</h2>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" defaultValue="true" />
@@ -97,7 +97,7 @@ const Login = () => {
                         </div>
 
                         <div className="text-sm">
-                            <Link to="/register" className='text-indigo-600 hover:text-indigo-500 text-center flex mx-auto justify-center my-0'>
+                            <Link to="/supplier-register" className='text-indigo-600 hover:text-indigo-500 text-center flex mx-auto justify-center my-0'>
                                 Dont have an account?
                             </Link>
                         </div>
@@ -112,9 +112,12 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
+                <Link to="/user-login" className='text-indigo-600 hover:text-indigo-500 text-center flex justify-center'>
+                    To User Login
+                </Link>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SupplierLogin;

@@ -44,7 +44,7 @@ export default function Body() {
         )
     }
     return (
-        <div className=" py-4 bg-gradient-to-r from-black to-gray-800">
+        <div className=" py-4 bg-gradient-to-r from-black to-gray-800 pb-24">
             <Cards cardInfo={products} />
         </div>
     )

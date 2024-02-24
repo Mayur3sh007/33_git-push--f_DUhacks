@@ -53,12 +53,21 @@ const Navbar = () => {
     e.preventDefault();
     console.log('Form submitted!');
     navigate(`/search/${text.toLowerCase().replace(/\s+/g, "-")}`);
-
   }
 
   const handleUploadClick = async (e) => {
     e.preventDefault();
     navigate('/productform')
+  };
+
+  const handleLoginClick = async (e) => {
+    e.preventDefault();
+    navigate('/user-login')
+  };
+
+  const handleLogoutClick = async (e) => {
+    e.preventDefault();
+
   };
 
   return (
@@ -147,7 +156,7 @@ const Navbar = () => {
             {isUserLoggedIn ? (
               <button
                 type="button"
-                onClick={() => { }}
+                onClick={handleLogoutClick}
                 className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
               >
                 Logout
@@ -155,7 +164,7 @@ const Navbar = () => {
             ) : (
               <button
                 type="button"
-                onClick={() => { }}
+                onClick={handleLoginClick}
                 className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
               >
                 Login

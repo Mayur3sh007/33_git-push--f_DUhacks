@@ -9,6 +9,7 @@ const useApi = (url) => {
     const [error, setError] = useState(null);
     const [apiData, setApiData] = useState([]);
 
+    console.log(url)
     useEffect(() => {
         setIsLoading(true)
         axios

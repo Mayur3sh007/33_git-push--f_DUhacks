@@ -3,67 +3,6 @@ import { useSelector } from 'react-redux';
 import Cards from '../components/Cards/Cards'
 import ProductCard from '../components/Cards/ProductCard';
 
-// import TVimg from "../assets/logo.png";
-// const products = [
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-//   {
-//     title: "Designer Vase",
-//     productImage: TVimg,
-//     description: "new vase for your living room",
-//     brand: "Not from sweatshop",
-//     carbonFP: 10,
-//   },
-
-// ];
-
 function AllProducts() {
 
   const products = useSelector(state => state.products.data?.data);

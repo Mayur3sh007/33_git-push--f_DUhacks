@@ -15,7 +15,7 @@ import SupplierLogin from './pages/SupplierLogin.jsx'
 import SupplierRegister from './pages/SupplierRegister.jsx'
 import PostForm from './pages/PostForm.jsx'
 import AllProducts from './pages/AllProducts.jsx'
-import ProductDetails from './pages/ProductDetails.jsx'
+import ProductDetails from './components/ProdDetails/ProductDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <AllProducts />
       },
       {
-        path: "products",
+        path: "productDetails/:slug",
         element: <ProductDetails />
       }
     ]

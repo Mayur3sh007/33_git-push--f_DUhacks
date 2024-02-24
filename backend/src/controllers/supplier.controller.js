@@ -57,6 +57,7 @@ const registerSupplier = asyncHandler(async (req,res) =>{
   {
       throw new ApiError(400,"Avatar file is required")
   }
+  
   if(!authCertificationLocalPath)
   {
       throw new ApiError(400,"Supplier needs to be authenticated")

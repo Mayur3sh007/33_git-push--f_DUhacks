@@ -5,11 +5,11 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import jwt from "jsonwebtoken"
 
 
-export const verifyJWT = asyncHandler( async(req, _, next) => {
+const verifyJWT = asyncHandler( async(req, _, next) => {
   try {
     const token = req.cookies?.accessToken;
   
-    if(!token) throw new ApiError(401, "Access token does not exist")
+    if(!token) throw new ApiError(401, " User is not logged in or Access token does not exist")
   
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
   
@@ -24,11 +24,11 @@ export const verifyJWT = asyncHandler( async(req, _, next) => {
   }
 })
 
-export const verifySupplier = asyncHandler( async(req, _, next) => {
+const verifySupplier = asyncHandler( async(req, _, next) => {
   try {
     const token = req.cookies?.accessTokenSupplier;
   
-    if(!token) throw new ApiError(401, "Access token does not exist")
+    if(!token) throw new ApiError(401, "Supplier not logged in or Access token does not exist")
   
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
   
@@ -42,3 +42,5 @@ export const verifySupplier = asyncHandler( async(req, _, next) => {
     throw new ApiError(401, error?.message || "invalid accessToken or no cookies found");
   }
 })
+
+export {verifyJWT, verifySupplier};

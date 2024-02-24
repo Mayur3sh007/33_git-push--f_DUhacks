@@ -1,18 +1,21 @@
 import mongoose, { Schema } from "mongoose";
+import {Supplier} from "./supplier.model.js"
+
 
 const supplyChainSchema = new mongoose.Schema(
   {
-  title: String,
-  description: String
+    title: String,
+    description: String
   }
 
 );
+
+const categoriesEnum = ["Electronics", "Clothing", "Food&Beverages", "Home", "Beauty", "Books", "Sports", "Toys"];
 
 const productSchema = new Schema(
   {
     supplyChain: {
       type: supplyChainSchema, // Reference to the supplyChainSchema
-      required: true
     },
     productImage: {
       type: String, //cloudinary url
@@ -26,8 +29,9 @@ const productSchema = new Schema(
       type: String,
       required: true
     },
-    brand:{
-      type: String,
+    supplier:{
+      type: Schema.Types.ObjectId,
+      ref: Supplier,
       required: true,
     },
     title: {
@@ -45,8 +49,12 @@ const productSchema = new Schema(
     averageRating: {
       type: Number,
       default: 0 // Default to 0
+    },
+    category: {
+      type: String,
+      enum: categoriesEnum,
+      required: true
     }
-    
   },
   { timestamps: true }
 );

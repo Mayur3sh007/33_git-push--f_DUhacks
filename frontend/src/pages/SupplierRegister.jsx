@@ -40,6 +40,7 @@ const SupplierRegister = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         delete formData.imagePreview;
+        delete formData.avatarPreview;
         try {
             const response = await axios.post(
                 "link",

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/userSlice';
 import axios from 'axios';
 
 const UserLogin = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,13 +22,14 @@ const UserLogin = () => {
         // console.log(formData);
         try {
             const response = await axios.post(
-                "/api/v1/user/login",
+                '/api/v1/user/login',
                 formData,
             );
 
             if (response.data && response.data.message) {
                 console.log(response.data)
                 alert(response.data.message);
+                dispatch(setUser(response.data));
                 navigate("/");
             } else {
                 // Handle error response properly

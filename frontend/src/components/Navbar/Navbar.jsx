@@ -2,8 +2,11 @@ import Logo from "../../assets/logo.png";
 import { IoMdSearch } from "react-icons/io";
 import { FaUpload } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from "../../store/userSlice";
+import axios from "axios";
 
 const Menu = [
   {
@@ -44,7 +47,37 @@ const DropdownLinks = [
 
 
 const Navbar = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+
+
+
+  const user = useSelector(state => state.user.status);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(user);
+
+  useEffect(() => {
+    const checkIfUser = async () => {
+      try {
+        const response = await axios.get("/api/v1/user/getUser");
+
+        dispatch(setUser(response.data))
+        setIsUserLoggedIn(response.status === 200)
+        console.log("USER LOGGED IN as: ", response.data);
+      } catch (error) {
+        console.error("User is Not Logged IN:", error);
+      }
+    };
+
+    checkIfUser();
+  }, []);
+
+  console.log(isUserLoggedIn);
+
+
+
+
+  // console.log(user);
+
+  // console.log(isUserLoggedIn);
 
   const [text, setText] = useState("");
   const navigate = useNavigate();
@@ -67,7 +100,10 @@ const Navbar = () => {
 
   const handleLogoutClick = async (e) => {
     e.preventDefault();
-
+    setIsUserLoggedIn(false);
+    const response = axios.get("/api/v1/user/logout")
+    console.log(response);
+    navigate('/')
   };
 
   return (

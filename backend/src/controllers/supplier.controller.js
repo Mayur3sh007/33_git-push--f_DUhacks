@@ -52,6 +52,7 @@ const registerSupplier = asyncHandler(async (req,res) =>{
   
   const avatarLocalPath = req.file?.avatar[0]?.path;
   const authCertificationLocalPath = req.file?.authCertification[0]?.path;
+
   if(!avatarLocalPath)
   {
       throw new ApiError(400,"Avatar file is required")
@@ -73,7 +74,7 @@ const registerSupplier = asyncHandler(async (req,res) =>{
       throw new ApiError(400,"authCertification file is required")
   }
 
-  const user = await Supplier.create({
+  const supplier = await Supplier.create({
       avatar: avatar.url,
       authCertification: authCertification.url,      //we dont wanna send entire object(img) of avatar but just its url
       email,
@@ -81,18 +82,18 @@ const registerSupplier = asyncHandler(async (req,res) =>{
       username: String(username).toLowerCase()
   })  
   
-  const createdUser = await Supplier.findById(user._id).select(
+  const createdSupplier = await Supplier.findById(supplier._id).select(
       "-password -refreshToken"                     
   )
 
 
-  if(!createdUser)    //not exists
+  if(!createdSupplier)    //not exists
   {
       throw new ApiError(500,"something went wrong while registering User")
   }
 
   return res.status(201).json(
-    new ApiResponse(200,createdUser,"User Registered Successfully")
+    new ApiResponse(200,createdSupplier,"User Registered Successfully")
   )
 
 })
@@ -103,26 +104,26 @@ const loginSupplier = asyncHandler(async(req,res)=>{
   
   if(!email)  
   {
-      throw new ApiError(400,"Username & Email is required")
+      throw new ApiError(400,"Email is required")
   }
 
-  const user = await Supplier.findOne({   
+  const supplier = await Supplier.findOne({   
     email
   });
 
-  if(!user)
+  if(!supplier)
   {
-      throw new ApiError(404,"User doesnt Exist")
+      throw new ApiError(404,"supplier doesnt Exist")
   }
 
-  const isPasswordValid = await user.isPasswordCorrect(password) 
+  const isPasswordValid = await supplier.isPasswordCorrect(password) 
   if(!isPasswordValid)
   {
-      throw new ApiError(401,"Invalid User Credentials")
+      throw new ApiError(401,"Invalid supplier Credentials")
   }
 
-  const {accessToken,refreshToken} = await generateAccessandRefreshTokens(user._id) 
-  const loggedInUser = await Supplier.findById(user._id).
+  const {accessTokenSupplier,refreshTokenSupplier} = await generateAccessandRefreshTokens(supplier._id) 
+  const loggedInUser = await Supplier.findById(supplier._id).
   select("-password -refreshToken")
 
   const options = {
@@ -133,25 +134,27 @@ const loginSupplier = asyncHandler(async(req,res)=>{
   
   return res
   .status(200)
-  .cookie("accessToken",accessToken,options)
-  .cookie("refreshToken",refreshToken,options)
+  .cookie("accessTokenSupplier",accessTokenSupplier,options)
+  .cookie("refreshTokenSupplier",refreshTokenSupplier,options)
   .json(
       new ApiResponse(
           200,
           {
-            user:loggedInUser,accessToken,refreshToken
+            supplier:loggedInUser,accessTokenSupplier,refreshTokenSupplier
           },
-          "User logged in Successfully"
+          "Supplier logged in Successfully"
       )
   )
 })
 
+
+//secured path
 const logoutSupplier = asyncHandler(async(req,res)=>{  
   await Supplier.findByIdAndUpdate(
-      req.user._id,   
+      req.supplier._id,   
       {
           $unset:{          
-              refreshToken: 1 
+              token: 1 
           }
       },
       {
@@ -168,19 +171,18 @@ const logoutSupplier = asyncHandler(async(req,res)=>{
   .status(200)
   .clearCookie("accessToken",options)
   .clearCookie("refreshToken",options)
-  .json(new ApiResponse(200,{},"User logged OUT"))
+  .json(new ApiResponse(200,{},"supplier logged OUT"))
 })
 
-//contollers for if user is authenticated
 const getSupplierData = asyncHandler(async(req, res)=>{
-    const user = req.user;
+    const supplier = req.supplier;
 
-    if(!user){
-        throw new ApiError(409,"urlser not logged in")
+    if(!supplier){
+        throw new ApiError(409,"supplier not logged in")
     }
     return res
     .status(200)
-    .json(new ApiResponse(200,user,"User Data fetched Successfully"))
+    .json(new ApiResponse(200,supplier,"User Data fetched Successfully"))
 
 })
 

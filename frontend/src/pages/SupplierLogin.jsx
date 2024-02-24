@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SupplierLogin = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SupplierLogin = () => {
         // console.log(formData);
         try {
             const response = await axios.post(
-                "link",
+                "/api/v1/supplier/login",
                 formData,
             );
 

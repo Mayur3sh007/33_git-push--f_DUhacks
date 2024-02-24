@@ -1,16 +1,30 @@
 import mongoose, { Schema } from "mongoose";
 
-const supplyChainSchema = new mongoose.Schema({
+const supplyChainSchema = new mongoose.Schema(
+  {
   title: String,
   description: String
-});
+  }
+
+);
 
 const productSchema = new Schema(
   {
-    supplyChain: [supplyChainSchema],
+    supplyChain: {
+      type: supplyChainSchema, // Reference to the supplyChainSchema
+      required: true
+    },
     productImage: {
       type: String, //cloudinary url
       required: true,
+    },
+    certification: {
+      type: String, //cloudinary url
+      required: true,
+    },
+    productLink: { 
+      type: String,
+      required: true
     },
     brand:{
       type: String,
@@ -28,10 +42,10 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    Rating:{
-        type:Number,
-        required:true,
-    },
+    averageRating: {
+      type: Number,
+      default: 0 // Default to 0
+    }
     
   },
   { timestamps: true }

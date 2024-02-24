@@ -13,6 +13,7 @@ import UserLogin from './pages/UserLogin.jsx'
 import UserRegister from './pages/UserRegister.jsx'
 import SupplierLogin from './pages/SupplierLogin.jsx'
 import SupplierRegister from './pages/SupplierRegister.jsx'
+import PostForm from './pages/PostForm.jsx'
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "supplier-register",
         element: <SupplierRegister />
+      },
+      {
+        path: "postform",
+        element: <PostForm />
       }
     ]
   }

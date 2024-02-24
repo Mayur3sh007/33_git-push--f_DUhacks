@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setData } from "../store/productSlice.js";
 import { useDispatch } from "react-redux";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 const useApi = (url) => {
     const dispatch = useDispatch();
@@ -12,19 +12,19 @@ const useApi = (url) => {
     useEffect(() => {
         setIsLoading(true)
         axios
-        .get(url)
-        .then((res)=>{
-            setApiData(res.data)
-            dispatch(setData(res.data))
-            setIsLoading(false)
-        })
-        .catch(
-            setError("Problems while fecthing products from Backend"),
-            setIsLoading(false)
-        )
-    })
+            .get(url)
+            .then((res) => {
+                setApiData(res.data)
+                dispatch(setData(res.data))
+                setIsLoading(false)
+            })
+            .catch(
+                setError("Problems while fecthing products from Backend"),
+                setIsLoading(false)
+            )
+    }, [url])
 
-    return {isLoading,error,apiData};
+    return { isLoading, error, apiData };
 
 }
 

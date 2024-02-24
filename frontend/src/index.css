@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    scroll-behavior: smooth;
+}
+
+#root {
+    background: #000;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background: #141b24;
+    margin-block: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #86EFAC;
+    border-radius: 100vw;
+    border: #141b24 solid 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #22c55e;
+}
+
+@media (min-width: 1280px) {
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #141b24;
+        margin-block: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #86EFAC;
+        border-radius: 100vw;
+        border: #141b24 solid 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #22c55e;
+    }
+
+}

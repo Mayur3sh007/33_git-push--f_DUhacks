@@ -44,6 +44,8 @@ const DropdownLinks = [
 
 
 const Navbar = () => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   const [text, setText] = useState("");
   const navigate = useNavigate();
 
@@ -141,6 +143,24 @@ const Navbar = () => {
               </span>
               <FaUpload className="text-xl text-green-400 drop-shadow-sm cursor-pointer" />
             </button>
+
+            {isUserLoggedIn ? (
+              <button
+                type="button"
+                onClick={() => { }}
+                className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => { }}
+                className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+              >
+                Login
+              </button>
+            )}
 
             {/* Darkmode Switch */}
             {/* <div>

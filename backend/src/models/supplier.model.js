@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import { Product } from './product.model.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from "bcrypt"
 
@@ -30,7 +31,7 @@ const supplierSchema = new Schema(
       products:[
         {
           type: Schema.Types.ObjectId,
-          ref: Product
+          ref: "Product"
         }
       ],
       token: {

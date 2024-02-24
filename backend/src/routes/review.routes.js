@@ -3,7 +3,7 @@ import {
   addReview,
   getReviewsForProduct,
   getReviewsByUser
-} from "../controllers/review.controller.js.controllers.js";
+} from "../controllers/review.controllers.js";
 
 const router = Router();
 

@@ -9,7 +9,7 @@ const addReview = asyncHandler(async(req,res)=>{
 
   if(!review) 
   {
-      throw new ApiError(500,"something went wrong while registering User")
+      throw new ApiError(500,"something went wrong while creating the Review")
   }
   await review.save();
 
@@ -19,24 +19,30 @@ const addReview = asyncHandler(async(req,res)=>{
 })
 
 
-export const getReviewsForProduct = asyncHandler(async (req, res) => {
-  try {
+  const getReviewsForProduct = asyncHandler(async (req, res) => {
+  try
+  {
     const productId = req.params.productId;
     const reviews = await Review.find({ product: productId }).populate('user').populate('product');
     console.log(reviews);
     res.status(200).json({ success: true, reviews });
-  } catch (error) {
+  }
+  catch (error)
+  {
     res.status(400).json({ success: false, error: error.message });
   }
 });
 
 // Controller function to fetch all reviews by a particular user
-export const getReviewsByUser = asyncHandler(async (req, res) => {
-  try {
+  const getReviewsByUser = asyncHandler(async (req, res) => {
+  try
+  {
     const userId = req.params.userId;
     const reviews = await Review.find({ user: userId }).populate('user').populate('product');
     res.status(200).json({ success: true, reviews });
-  } catch (error) {
+  }
+  catch (error)
+  {
     res.status(400).json({ success: false, error: error.message });
   }
 });

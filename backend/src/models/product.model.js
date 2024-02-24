@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import {Supplier} from "./supplier.model.js"
+import {Supplier} from "../models/supplier.model.js"
 
 
 const supplyChainSchema = new mongoose.Schema(
@@ -31,7 +31,7 @@ const productSchema = new Schema(
     },
     supplier:{
       type: Schema.Types.ObjectId,
-      ref: Supplier,
+      ref: "Supplier",
       required: true,
     },
     title: {

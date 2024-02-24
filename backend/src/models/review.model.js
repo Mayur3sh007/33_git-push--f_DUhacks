@@ -1,17 +1,17 @@
 import mongoose, { Schema } from "mongoose";
-import { Product } from "./product.model";
-import { User } from "./user.model";
+import { Product } from "./product.model.js";
+import { User } from "./user.model.js";
 
 const reviewSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: User, 
+      ref: "User", 
       required: true
     },
     product: {
       type: Schema.Types.ObjectId,
-      ref: Product, 
+      ref: "Product", 
       required: true
     },
     comment:{

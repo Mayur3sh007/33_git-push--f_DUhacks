@@ -81,11 +81,10 @@ function ProductDetails() {
         </div>
       )}
 
-      <form onSubmit={handleSubmitReview} className="w-[80%] mx-auto mt-16 p-4  text-white shadow rounded">
-        <h2 className="text-6xl font-bold mb-12 text-center">Reviews</h2>
-
-        <div className="flex flex-col justify-between my-10">
-          <label className=" mb-1 text-3xl">Rating</label>
+      {user ? (
+        <form onSubmit={handleSubmitReview} className="w-[80%] mx-auto mt-16 p-4  text-white shadow rounded">
+          <h2 className="text-6xl font-bold mb-12 text-center">Reviews</h2>
+  
           <div className="flex items-center mt-7 space-x-9">
 
             <input type="radio" name="rating" id="rating1" value="1" className="focus:outline-none focus:ring-2 focus:ring-blue-500 w-6 h-6" onChange={handleRatingChange} />
@@ -100,17 +99,21 @@ function ProductDetails() {
             <label htmlFor="rating5" className='text-2xl'>5</label>
 
           </div>
+          <div className="mb-4">
+            <label htmlFor="message" className="block text-3xl mb-1 ">Message</label>
+            <textarea id="message" value={comment} onChange={handleReviewChange} className="w-full py-2 px-4 rounded border bg-gradient-to-r from-gray-800 to-black border-gray-300 focus:outline-none focus:ring-2 text-xl focus:ring-blue-500"></textarea>
+          </div>
+          <div className='flex mx-auto w-fit'>
+            <button type="submit" className="bg-green-400 text-white py-2 px-4 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2  focus:ring-green-500 focus:ring-opacity-50">
+              Submit Review
+            </button>
+          </div>
+        </form>
+      ) : (
+        <div className="mt-8 text-2xl font-semibold">
+          Please log in to leave a review.
         </div>
-        <div className="mb-4">
-          <label htmlFor="message" className="block text-3xl mb-1 ">Message</label>
-          <textarea id="message" value={comment} onChange={handleReviewChange} className="w-full py-2 px-4 rounded border bg-gradient-to-r from-gray-800 to-black border-gray-300 focus:outline-none focus:ring-2 text-xl focus:ring-blue-500"></textarea>
-        </div>
-        <div className='flex mx-auto w-fit'>
-          <button type="submit" className="bg-green-400 text-white py-2 px-4 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2  focus:ring-green-500 focus:ring-opacity-50">
-            Submit Review
-          </button>
-        </div>
-      </form>
+      )}
 
       <div className="mt-8">
         <h3 className="text-4xl font-bold mb-4">Comments:</h3>

@@ -33,7 +33,7 @@ const generateAccessandRefreshTokens = async(supplierId)=>{
 
 const registerSupplier = asyncHandler(async (req,res) =>{   
   const {email,username,password} = req.body         
-  // console.log("email",email);
+
   if(
       [email,username,password].some((field)=>String(field).trim() === "")      
   )

@@ -1,7 +1,3 @@
-//register supplier
-//login
-//logout
-
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";  
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
@@ -50,8 +46,8 @@ const registerSupplier = asyncHandler(async (req,res) =>{
   }
 
   
-  const avatarLocalPath = req.file?.avatar[0]?.path;
-  const authCertificationLocalPath = req.file?.authCertification[0]?.path;
+  const avatarLocalPath = req.files?.avatar[0]?.path;
+  const authCertificationLocalPath = req.files?.authCertification[0]?.path;
 
   if(!avatarLocalPath)
   {

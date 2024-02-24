@@ -13,18 +13,18 @@ function Layout() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const getProducts = async () => {
+    const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/v1/product/getAllProducts");
         setProducts(response.data);
-        console.log(products)
+        console.log(response.data);
       } catch (error) {
-        console.log("Products not fetched successfully", error);
+        console.error('Error fetching products:', error);
       }
     };
 
-    getProducts(); // Call the function to fetch products
-  }, []); // Empty dependency array to run only once on component mount
+    fetchProducts();
+  }, []); 
 
   useEffect(() => {
     const checkIfUser = async () => {
@@ -38,7 +38,7 @@ function Layout() {
     };
 
     checkIfUser(); // Call the function to check user on mount
-  }, []); // Empty dependency array to run only once on component mount
+  }, []); 
 
   const navigate = useNavigate();
 

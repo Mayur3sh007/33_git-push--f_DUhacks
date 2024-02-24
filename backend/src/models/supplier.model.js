@@ -55,7 +55,7 @@ supplierSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
-supplierSchema.methods.generateAccessTokenSupplier = function () {
+supplierSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -69,7 +69,8 @@ supplierSchema.methods.generateAccessTokenSupplier = function () {
     );
 };
 
-supplierSchema.methods.generateRefreshTokenSupplier = function () { //long term
+supplierSchema.methods.generateRefreshToken = function () { //long term
+    console.log(process.env.REFRESH_TOKEN_SECRET)
     return jwt.sign(
         {
             _id: this._id,
@@ -80,5 +81,4 @@ supplierSchema.methods.generateRefreshTokenSupplier = function () { //long term
         }
     )
 }
-
 export const Supplier = mongoose.model("Supplier", supplierSchema)

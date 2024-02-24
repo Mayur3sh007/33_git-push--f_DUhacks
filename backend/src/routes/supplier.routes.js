@@ -25,7 +25,7 @@ router.route("/login").post(loginSupplier)
 
 //Secured routes
 router.route("/logout").get(verifySupplier,logoutSupplier);
-router.route("/getuser").get(verifySupplier, getSupplierData);
+router.route("/getsupplier").get(verifySupplier, getSupplierData);
 
 
 export default router;

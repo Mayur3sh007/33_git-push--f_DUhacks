@@ -13,14 +13,15 @@ const generateAccessandRefreshTokens = async(supplierId)=>{
         {
             throw new ApiError(404,"supplier not found");
         }
+        console.log(supplier);
         
-        const accessToken = supplier.generateAccessTokenSupplier()
-        const refreshToken = supplier.generateRefreshTokenSupplier()
+        const accessTokenSupplier = supplier.generateAccessToken()
+        const refreshTokenSupplier = supplier.generateRefreshToken()
         
-        supplier.refreshToken = refreshToken                
+        supplier.token = refreshTokenSupplier                
         await supplier.save({ validateBeforeSave: false })  
         
-        return {accessToken, refreshToken}           
+        return {accessTokenSupplier, refreshTokenSupplier}           
   
     } catch (error) {
         throw new ApiError(500,"Something went wrong while generating Refresh and Access Tokens");
@@ -45,10 +46,11 @@ const registerSupplier = asyncHandler(async (req,res) =>{
       throw new ApiError(409,"Supplier with same Supplier name or email exists")
   }
 
-  
-  const avatarLocalPath = req.files?.avatar[0]?.path;
-  const authCertificationLocalPath = req.files?.authCertification[0]?.path;
 
+  const avatarLocalPath = req.files.avatar[0].path
+  const authCertificationLocalPath = req.files.authCertification[0].path
+
+  
   if(!avatarLocalPath)
   {
       throw new ApiError(400,"Avatar file is required")
@@ -62,25 +64,25 @@ const registerSupplier = asyncHandler(async (req,res) =>{
   const avatar = await uploadOnCloudinary(avatarLocalPath)   
   if(!avatar)
   {
-      throw new ApiError(400,"Avatar file is required")
+      throw new ApiError(400,"error while uploading the avatar file on the cloud")
   }
 
   const authCertification = await uploadOnCloudinary(authCertificationLocalPath)   
   if(!authCertification)
   {
-      throw new ApiError(400,"authCertification file is required")
+      throw new ApiError(400,"error while uploading the authCertification file on the cloud")
   }
 
   const supplier = await Supplier.create({
-      avatar: avatar.url,
-      authCertification: authCertification.url,      //we dont wanna send entire object(img) of avatar but just its url
+      avatar: avatar?.url,
+      authCertification: authCertification?.url,      //we dont wanna send entire object(img) of avatar but just its url
       email,
       password,
       username: String(username).toLowerCase()
   })  
   
   const createdSupplier = await Supplier.findById(supplier._id).select(
-      "-password -refreshToken"                     
+      "-password "                     
   )
 
 
@@ -166,8 +168,8 @@ const logoutSupplier = asyncHandler(async(req,res)=>{
 
   return res
   .status(200)
-  .clearCookie("accessToken",options)
-  .clearCookie("refreshToken",options)
+  .clearCookie("accessTokenSupplier",options)
+  .clearCookie("refreshTokenSupplier",options)
   .json(new ApiResponse(200,{},"supplier logged OUT"))
 })
 

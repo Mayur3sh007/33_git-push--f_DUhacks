@@ -1,5 +1,6 @@
 import {uploadOnServer} from '../middlewares/multer.middleware.js'
 import { Router } from 'express'
+import { verifySupplier } from "../middlewares/auth.middleware.js";
 import{
   createProduct,
   getAllProducts
@@ -8,6 +9,7 @@ import{
 const router = Router();
 
 router.route("/createProduct").post(
+  verifySupplier,
   uploadOnServer.fields([ 
     {
       name: "productImage",

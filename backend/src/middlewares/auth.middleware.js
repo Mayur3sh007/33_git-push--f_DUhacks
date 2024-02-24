@@ -26,12 +26,13 @@ const verifyJWT = asyncHandler( async(req, _, next) => {
 
 const verifySupplier = asyncHandler( async(req, _, next) => {
   try {
+    console.log(req.cookies)
     const token = req.cookies?.accessTokenSupplier;
   
     if(!token) throw new ApiError(401, "Supplier not logged in or Access token does not exist")
   
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-  
+    console.log(decodedToken)
     const supplier = await Supplier.findById(decodedToken?._id).select("-password -token")
   
     if(!supplier) throw new ApiError(401, "Invalid Access token");

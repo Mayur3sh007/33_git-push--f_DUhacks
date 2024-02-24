@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setSupplier } from '../store/supplierSlice';
 import axios from "axios";
 import { useEffect } from "react";
+import InputStarRating from "../components/InputStarRating/InputStarRating";
 
 function Home() {
     const dispatch = useDispatch();
@@ -32,6 +33,9 @@ function Home() {
         <>
             <Hero />
             <Body />
+            <div className="h-60 w-full border-2">
+                <InputStarRating />
+            </div>
         </>
     );
 }

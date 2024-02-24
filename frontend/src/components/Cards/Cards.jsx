@@ -15,7 +15,7 @@ export default function Cards(props) {
 
         < div className="flex flex-wrap justify-between px-8 " >
             {
-                props.cardInfo.slice(-4).map((card, index) => (
+                props.cardInfo.map((card, index) => (
                     <motion.div
                         // onClick={handleClick}
                         key={index}

@@ -4,9 +4,11 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 import { Review } from "../models/review.model.js";
 
 const addReview = asyncHandler(async(req,res)=>{  
+  console.log(req.body);
+  console.log("anish");
   const { user, product, comment, rating } = req.body;
   const review = await Review.create({ user, product, comment, rating });
-
+  console.log(review);
   if(!review) 
   {
       throw new ApiError(500,"something went wrong while creating the Review")

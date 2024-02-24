@@ -179,6 +179,9 @@ const getSupplierData = asyncHandler(async(req, res)=>{
     if(!supplier){
         throw new ApiError(409,"supplier not logged in")
     }
+
+    await supplier.populate('products');
+
     return res
     .status(200)
     .json(new ApiResponse(200,supplier,"User Data fetched Successfully"))

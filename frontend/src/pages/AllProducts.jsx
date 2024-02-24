@@ -5,7 +5,7 @@ import Cards from '../components/Cards/Cards'
 function AllProducts() {
 
     const products = useSelector(state => state.products.data?.data);
-
+    
     if (!products)
     {
         return <div>Loading...</div>; // Render a loading indicator

@@ -16,7 +16,7 @@ function CircularProgressBar({ rating }) {
             if (increment > 0) {
                 setTimeout(() => {
                     setPercentage(percentage + increment);
-                }, 50);
+                }, 30);
             }
         };
 

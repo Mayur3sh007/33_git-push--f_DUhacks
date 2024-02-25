@@ -41,9 +41,10 @@ const SupplierRegister = () => {
         e.preventDefault();
         delete formData.imagePreview;
         delete formData.avatarPreview;
+        console.log(formData);
         try {
             const response = await axios.post(
-                "link",
+                "/api/v1/supplier/register",
                 formData,
                 {
                     headers: {

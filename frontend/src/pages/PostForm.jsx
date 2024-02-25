@@ -3,6 +3,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+const categoriesEnum = [
+  "Electronics",
+  "Clothing",
+  "Food&Beverages",
+  "Home",
+  "Beauty",
+  "Books",
+  "Sports",
+  "Toys"
+];
+
 function PostForm() {
   const supplier = useSelector((state) => state.supplier);
   const navigate = useNavigate();
@@ -15,15 +26,14 @@ function PostForm() {
     productImage: null,
     imagePreview: null,
     certification: null,
-    certificationPreview: null, 
+    certificationPreview: null,
     supplyChain: [],
     productLink: "",
-    category:"Toys",
+    category: "Toys",
     supplier: supplier.data.data?._id,
-    carbonFP:0,
-  
+    carbonFP: 0,
   });
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +52,7 @@ function PostForm() {
     setFormData({
       ...formData,
       certification: imageFile,
-      certificationPreview : URL.createObjectURL(imageFile),
+      certificationPreview: URL.createObjectURL(imageFile),
     });
   };
 
@@ -76,7 +86,7 @@ function PostForm() {
           },
         }
       );
-        
+
       alert(response.data.message);
       navigate("/");
     } catch (error) {
@@ -91,14 +101,14 @@ function PostForm() {
 
   return (
     <div className="bg-gradient-to-r from-black to-gray-900 text-white min-h-screen flex flex-col justify-center px-10">
-      <h1 className="text-6xl mb-6 text-green-500">Create New Product</h1>
+      <h1 className="text-6xl mb-6 text-green-500 mx-24">Create New Product</h1>
 
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         className="w-full"
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between mx-24">
           <div className="w-[40%]">
             <div className="mb-4">
               <label htmlFor="title" className="block mb-1 text-white">
@@ -132,31 +142,9 @@ function PostForm() {
             </div>
 
 
-            {/* Certification */}
-            <div className="mb-4 w-full">
-              <label htmlFor="certification" className="block mb-1 text-white">
-                Upload Valid Certificate Image:
-              </label>
-              <input
-                type="file"
-                id="certification"
-                name="certification"
-                accept="image/*"
-                onChange={handleCertImageChange}
-                className="w-full border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
-                required
-              />
-              {/* Display image preview */}
-              {formData.certificationPreview && (
-                <img
-                  src={formData.certificationPreview}
-                  alt="Product Preview"
-                  className="mt-2 max-w-[180px] mx-auto"
-                />
-              )}
-            </div>
 
-                {/* Carbon FP */}
+
+            {/* Carbon FP */}
             <div className="mb-4">
               <label htmlFor="carbonFP" className="block mb-1 text-white">
                 Carbon Footprint:
@@ -213,18 +201,6 @@ function PostForm() {
               </div>
             ))}
 
-            {/* Button to add more supply chain items */}
-            <div className="mb-4">
-              <button
-                type="button"
-                onClick={addSupplyChainItem}
-                className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
-              >
-                Add Supply Chain Item
-              </button>
-            </div>
-          </div>
-
             <div className="mb-4">
               <label htmlFor="productLink" className="block mb-1 text-white">
                 Buy Product Link:
@@ -241,7 +217,42 @@ function PostForm() {
               />
             </div>
 
-            
+            <div className="mb-4">
+              <label htmlFor="category" className="block mb-1 text-white">
+                Category:
+              </label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              >
+                {categoriesEnum.map((category, index) => (
+                  <option key={index} value={category} className="bg-[#080b12]">
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+
+            {/* Button to add more supply chain items */}
+            <div className="mb-4">
+              <button
+                type="button"
+                onClick={addSupplyChainItem}
+                className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+              >
+                Add Supply Chain Item
+              </button>
+            </div>
+          </div>
+
+
+
+
 
 
 
@@ -263,6 +274,29 @@ function PostForm() {
               {formData.imagePreview && (
                 <img
                   src={formData.imagePreview}
+                  alt="Product Preview"
+                  className="mt-2 max-w-[180px] mx-auto"
+                />
+              )}
+            </div>
+            {/* Certification */}
+            <div className="mb-4 w-full">
+              <label htmlFor="certification" className="block mb-1 text-white">
+                Upload Valid Certificate Image:
+              </label>
+              <input
+                type="file"
+                id="certification"
+                name="certification"
+                accept="image/*"
+                onChange={handleCertImageChange}
+                className="w-full border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              />
+              {/* Display image preview */}
+              {formData.certificationPreview && (
+                <img
+                  src={formData.certificationPreview}
                   alt="Product Preview"
                   className="mt-2 max-w-[180px] mx-auto"
                 />

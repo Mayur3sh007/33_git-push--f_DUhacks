@@ -136,7 +136,12 @@ function ProductDetails() {
             </Link>
           </div>
           <div className='w-44 h-44 self-center justify-self-center'>
-            <Circlebar rating={product?.averageRating} />
+            <a href="#comments">
+              <Circlebar rating={product?.averageRating} />
+            </a>
+
+
+
           </div>
         </div>
       )}
@@ -216,7 +221,7 @@ function ProductDetails() {
 
 
       <div className="mt-8">
-        <h3 className="text-4xl font-bold mb-4">Comments:</h3>
+        <h3 className="text-4xl font-bold mb-4" id='comments'>Comments:</h3>
         {/* <ul>
           {comments.map((comment, index) => (
             <li key={index}>{comment.comment} R: {comment.rating}</li>

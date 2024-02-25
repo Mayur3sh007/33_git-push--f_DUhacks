@@ -22,6 +22,11 @@ const Menu = [
   },
   {
     id: 3,
+    name: "Categories",
+    link: "/category",
+  },
+  {
+    id: 4,
     name: "Explore",
     link: "/allProducts",
   },

@@ -33,7 +33,7 @@ const UserRegister = () => {
         delete formData.imagePreview;
         try {
             const response = await axios.post(
-                "link",
+                "/api/v1/user/register",
                 formData,
                 {
                     headers: {

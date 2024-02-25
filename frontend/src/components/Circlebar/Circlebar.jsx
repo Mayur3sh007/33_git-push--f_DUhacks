@@ -49,7 +49,7 @@ function CircularProgressBar({ rating }) {
                     text={`${rating.toFixed(1)}/5`}
                     styles={customStyles} />
             </div>
-            <p className='text-green-400'>Average Rating</p>
+            <p className='text-green-400 mt-4'>Average Rating</p>
         </div>
     );
 }

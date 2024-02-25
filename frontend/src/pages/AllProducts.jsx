@@ -9,23 +9,23 @@ function Filters({ applyFilter, resetFilters, filterOptions }) {
   const [filterInput, setFilterInput] = useState('');
 
   return (
-    <div className="flex flex-wrap justify-end mb-8">
+    <div className="flex flex-wrap justify-end mb-8 text-white">
       <div className="relative mr-2 mb-2">
-        <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} className="rounded-lg pl-5 btn btn-green-500  outline-none h-10 font-extrabold  bg-green-500 hover:bg-green-600 ">
+        <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} className="rounded-lg pl-5 w-60 btn btn-green-500  outline-none h-10 font-extrabold  bg-green-500 hover:bg-green-600 ">
           <option value="">Filter By</option>
           {filterOptions.map(option => (
             <option key={option.key} value={option.key} className='hover:bg-black text-lg text-white ' >{option.label}</option>
           ))}
         </select>
         <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none bg-gray-900 rounded-e-lg ">
-          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <svg className="fill-current h-4 w-4 rotate-90 text-4xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path fill="#fff" d="M8.3 10.3a1 1 0 0 0 1.4 1.4l3-3a1 1 0 0 0 0-1.4l-3-3a1 1 0 1 0-1.4 1.4L10.58 7H4a1 1 0 1 0 0 2h6.58zM12 5h4a1 1 0 1 0 0-2h-4a1 1 0 0 0 0 2z" />
           </svg>
         </div>
       </div>
-      <input className="input  input-green-500 bg-slate-700 focus:outline-green-700" type="text" placeholder="Enter search term" value={filterInput} onChange={e => setFilterInput(e.target.value)} style={{ display: filterOptions.find(option => option.key === selectedOption)?.type === 'text' ? 'inline-block' : 'none' }} />
-      <button onClick={() => applyFilter(selectedOption, filterInput)} className="btn btn-green-500 hover:bg-green-700 mr-2 mb-2 rounded-lg px-3">Apply Filter</button>
-      <button onClick={resetFilters} className="btn btn-gray-500 hover:bg-green-700 mb-2 rounded-lg  px-3">Reset Filters</button>
+      <input className=" bg-green-800 outline-none rounded-lg brightness-200 px-2 h-10 font-bold focus:outline-green-700" type="text" placeholder="Enter search term" value={filterInput} onChange={e => setFilterInput(e.target.value)} style={{ display: filterOptions.find(option => option.key === selectedOption)?.type === 'text' ? 'inline-block' : 'none' }} />
+      <button onClick={() => applyFilter(selectedOption, filterInput)} className="btn btn-green-500 hover:bg-green-700 mx-1 rounded-lg px-3">Apply Filter</button>
+      <button onClick={resetFilters} className="btn btn-gray-500 hover:bg-green-700  rounded-lg mx-1  px-3">Reset Filters</button>
     </div>
   );
 }

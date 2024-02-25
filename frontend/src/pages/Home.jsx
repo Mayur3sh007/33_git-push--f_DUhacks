@@ -35,9 +35,9 @@ function Home() {
         <>
             <Hero />
             <Body />
-            <div className="h-60 w-full border-2">
+            {/* <div className="h-60 w-full">
                 <InputStarRating />
-            </div>
+            </div> */}
         </>
     );
 }

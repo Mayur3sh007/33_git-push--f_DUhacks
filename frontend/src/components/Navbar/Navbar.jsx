@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from "../../store/userSlice";
+import {setSupplier} from "../../store/supplierSlice"
 import axios from "axios";
 
 const Menu = [
@@ -48,11 +49,13 @@ const DropdownLinks = [
 
 const Navbar = () => {
   const dispatch = useDispatch();
-
-
-
   const user = useSelector(state => state.user.status);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(user);
+  const supplier = useSelector(state => state.supplier.status);
+  const [isSupplierLoggedIn, setIsSupplierLoggedIn] = useState(supplier);
+
+
+  
 
   useEffect(() => {
     const checkIfUser = async () => {
@@ -70,14 +73,23 @@ const Navbar = () => {
     checkIfUser();
   }, []);
 
+  useEffect(() => {
+    const checkIfSupplier = async () => {
+      try {
+        const response = await axios.get("/api/v1/supplier/getsupplier");
+        dispatch(setSupplier(response.data))
+        setIsSupplierLoggedIn(response.status === 200)
+        console.log("Supplier LOGGED IN as: ", response.data);
+      } catch (error) {
+        console.error("Supplier is Not Logged IN:", error);
+      }
+    };
+
+    checkIfSupplier();
+  }, []);
+
   console.log(isUserLoggedIn);
 
-
-
-
-  // console.log(user);
-
-  // console.log(isUserLoggedIn);
 
   const [text, setText] = useState("");
   const navigate = useNavigate();
@@ -176,18 +188,19 @@ const Navbar = () => {
             </form>
 
 
-
-
             {/* order button */}
-            <button
-              onClick={handleUploadClick}
-              className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-green-400  py-1 px-4 rounded-full flex items-center gap-3 group"
-            >
-              <span className="group-hover:block hidden transition-all duration-200">
-                Upload your product
-              </span>
-              <FaUpload className="text-xl text-green-400 drop-shadow-sm cursor-pointer" />
-            </button>
+            {isSupplierLoggedIn && (
+              <button
+                onClick={handleUploadClick}
+                className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-green-400  py-1 px-4 rounded-full flex items-center gap-3 group"
+              >
+                <span className="group-hover:block hidden transition-all duration-200">
+                  Upload your product
+                </span>
+                <FaUpload className="text-xl text-green-400 drop-shadow-sm cursor-pointer" />
+              </button>
+            )}
+
 
             {isUserLoggedIn ? (
               <button

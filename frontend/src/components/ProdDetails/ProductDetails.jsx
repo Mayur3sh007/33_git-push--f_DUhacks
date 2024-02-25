@@ -89,6 +89,7 @@ function ProductDetails() {
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
+    console.log(user)
     try {
       const response = await axios.post('/api/v1/review/add', {
         user: user?._id,

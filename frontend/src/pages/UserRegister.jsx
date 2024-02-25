@@ -31,9 +31,10 @@ const UserRegister = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         delete formData.imagePreview;
+        console.log(formData)
         try {
             const response = await axios.post(
-                "/api/v1/user/register",
+                '/api/v1/user/register',
                 formData,
                 {
                     headers: {
@@ -111,8 +112,9 @@ const UserRegister = () => {
                                     onChange={handleChange}
                                 />
                             </div>
-
                         </div>
+
+                        {/* Avatar Image */}
                         <div className="flex flex-col items-center mx-auto">
                             <label htmlFor="productImage" className="block mb-1 text-white">
                                 Avatar Image:
@@ -126,6 +128,8 @@ const UserRegister = () => {
                                 className="w-full border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
                                 required
                             />
+
+
                             {/* Display image preview */}
                             {formData.imagePreview && (
                                 <img
@@ -137,6 +141,7 @@ const UserRegister = () => {
                         </div>
                     </div>
 
+                    {/* Submit Btn */}
                     <div className='flex justify-center items-center'>
                         <button
                             type="submit"
@@ -145,6 +150,7 @@ const UserRegister = () => {
                             Register
                         </button>
                     </div>
+
                 </form>
                 <Link to="/supplier-register" className='text-indigo-600 hover:text-indigo-500 text-center w-fit mx-auto flex'>
                     Are you a supplier?

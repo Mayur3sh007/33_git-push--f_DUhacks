@@ -134,7 +134,7 @@ const Navbar = () => {
     <div className="shadow-md bg-white dark:bg-gray-950 dark:text-white duration-200 relative z-40 px-4">
       {/* upper Navbar */}
       <div className="bg-primary/40 py-3">
-        <div className="container flex justify-between items-center">
+        <div className="container flex justify-between items-center mx-auto">
           <div>
             <Link to="#" className="font-bold text-2xl sm:text-3xl flex gap-2">
               <img src={Logo} alt="Logo" className="w-10" />

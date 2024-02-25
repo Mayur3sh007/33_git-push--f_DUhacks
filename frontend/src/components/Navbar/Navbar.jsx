@@ -59,7 +59,7 @@ const Navbar = () => {
   useEffect(() => {
     const checkIfUser = async () => {
       try {
-        const response = await axios.get("/api/v1/user/getUser");
+        const response = await axios.get('/api/v1/user/getUser');
 
         dispatch(setUser(response.data))
         setIsUserLoggedIn(response.status === 200)
@@ -75,7 +75,7 @@ const Navbar = () => {
   useEffect(() => {
     const checkIfSupplier = async () => {
       try {
-        const response = await axios.get("/api/v1/supplier/getsupplier");
+        const response = await axios.get('/api/v1/supplier/getsupplier');
         dispatch(setSupplier(response.data))
         setIsSupplierLoggedIn(response.status === 200)
         console.log("Supplier LOGGED IN as: ", response.data);

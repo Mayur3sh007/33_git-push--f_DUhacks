@@ -18,7 +18,7 @@ const SupplierLogin = () => {
         // console.log(formData);
         try {
             const response = await axios.post(
-                "/api/v1/supplier/login",
+                '/api/v1/supplier/login',
                 formData,
             );
 

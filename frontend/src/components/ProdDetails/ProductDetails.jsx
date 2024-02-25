@@ -6,20 +6,22 @@ import axios from 'axios';
 
 function ProductDetails() {
   const navigate = useNavigate();
-  const products = useSelector(state => state.products.data?.data);
   const { slug } = useParams();
   const user = useSelector(state => state.user.data?.data);
-
+  const products = useSelector(state => state.products.data?.data);
   const [product, setProduct] = useState(null);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+  const [foundSupplierName, setFoundSupplierName] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+
         const response = await axios.get(`/api/v1/review/getByProductId/${slug}`);
-        setComments(response.data.reviews);
+        setComments(response.data.reviews); 
+        
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
@@ -34,8 +36,38 @@ function ProductDetails() {
     } else {
       const foundProduct = products.find(each => each._id === slug);
       setProduct(foundProduct);
+      const foundSupplierName = foundProduct.supplier.username;    // Get supplier's name
+      setFoundSupplierName(foundSupplierName); // Store the supplier name
     }
   }, [products, navigate, slug]);
+
+  // Make API call using the foundSupplierName
+  useEffect(() => {
+    if (foundSupplierName) {
+      const options = {
+        method: 'GET',
+        url: '/scores',
+        params: {
+          companyname: foundSupplierName// Use the foundSupplierName here
+        },
+        headers: {
+          'X-RapidAPI-Key': '33ef4a6069mshe660049d750690bp197a5bjsncc2df2cdb993',
+          'X-RapidAPI-Host': 'gaialens-esg-scores.p.rapidapi.com'
+        }
+      };
+
+      const fetchSupplierData = async () => {
+        try {
+          const response = await axios.request(options);
+          console.log(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchSupplierData();
+    }
+  }, [foundSupplierName]);
 
   const handleRatingChange = event => {
     setRating(parseInt(event.target.value));

@@ -7,60 +7,59 @@ import { setData } from '../../store/productSlice';
 
 
 
-const products = [
-    {
-        title: "Designer Vase",
-        productImage: TVimg,
-        description: "new vase for your living room",
-        brand: "Not from sweatshop",
-        carbonFP: 10,
-    },
-    {
-        title: "Designer Vase",
-        productImage: TVimg,
-        description: "new vase for your living room",
-        brand: "Not from sweatshop",
-        carbonFP: 10,
-    },
-    {
-        title: "Designer Vase",
-        productImage: TVimg,
-        description: "new vase for your living room",
-        brand: "Not from sweatshop",
-        carbonFP: 10,
-    },
-    {
-        title: "Designer Vase",
-        productImage: TVimg,
-        description: "new vase for your living room",
-        brand: "Not from sweatshop",
-        carbonFP: 10,
-    },
+// const products = [
+//     {
+//         title: "Designer Vase",
+//         productImage: TVimg,
+//         description: "new vase for your living room",
+//         brand: "Not from sweatshop",
+//         carbonFP: 10,
+//     },
+//     {
+//         title: "Designer Vase",
+//         productImage: TVimg,
+//         description: "new vase for your living room",
+//         brand: "Not from sweatshop",
+//         carbonFP: 10,
+//     },
+//     {
+//         title: "Designer Vase",
+//         productImage: TVimg,
+//         description: "new vase for your living room",
+//         brand: "Not from sweatshop",
+//         carbonFP: 10,
+//     },
+//     {
+//         title: "Designer Vase",
+//         productImage: TVimg,
+//         description: "new vase for your living room",
+//         brand: "Not from sweatshop",
+//         carbonFP: 10,
+//     },
 
 
-];
+// ];
 
 
 
 export default function Body() {
 
-    // const dispatch = useDispatch();
-    // const [products, setProducts] = useState(null);
+    const dispatch = useDispatch();
+    const [products, setProducts] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchProducts = async () => {
-    //         try {
-    //             const response = await axios.get('/api/v1/product/getAllProducts');
-    //             setProducts(response.data);
-    //             dispatch(setData(response.data)) //push all products into store
-    //             console.log(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching products:', error);
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('/api/v1/product/getAllProducts');
+                setProducts(response.data.data);
+                dispatch(setData(response.data)) //push all products into store
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
 
-    //     fetchProducts();
-    // }, []);
+        fetchProducts();
+    }, []);
 
     if (!products) {
         return (
@@ -73,7 +72,7 @@ export default function Body() {
 
         <div className=" py-4 bg-gray-900 pb-24">
             <p className="px-12 my-4 text-4xl font-extrabold text-gray-200">Latest Products</p>
-            <Cards cardInfo={products?.slice(-4)} />
+            <Cards cardInfo={products.slice(-4)} />
         </div>
     )
 }

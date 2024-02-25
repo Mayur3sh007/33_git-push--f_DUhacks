@@ -29,7 +29,7 @@ export default function Cards(props) {
 
                             <div className="flex flex-wrap justify-evenly">
                                 <div className="h-[50%] my-4">
-                                    <img src={card.productImage} className="h-full rounded-xl border-2 " />
+                                    <img src={card.productImage} className="h-full rounded-xl" />
                                     {/* <p className="text-xs">{card.description}</p> */}
                                 </div>
                             </div>

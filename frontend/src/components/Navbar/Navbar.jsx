@@ -104,6 +104,11 @@ const Navbar = () => {
     navigate('/user-login')
   };
 
+  const handleRegisterClick = async (e) => {
+    e.preventDefault();
+    navigate('/user-register')
+  }
+
   const userHandleLogoutClick = async (e) => {
     e.preventDefault();
     setIsUserLoggedIn(false);
@@ -147,7 +152,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          
+
           {/* search bar */}
 
           <div className="flex justify-between items-center gap-4">
@@ -223,6 +228,18 @@ const Navbar = () => {
                   className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
                 >
                   Login
+                </button>
+              )
+            }
+
+            {
+              !(isUserLoggedIn || isSupplierLoggedIn) && (
+                <button
+                  type="button"
+                  onClick={handleRegisterClick}
+                  className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+                >
+                  Register
                 </button>
               )
             }

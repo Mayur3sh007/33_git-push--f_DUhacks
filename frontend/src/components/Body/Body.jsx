@@ -44,7 +44,9 @@ export default function Body() {
         )
     }
     return (
+
         <div className=" py-4 bg-gradient-to-r from-black to-gray-800 pb-24">
+            <p className="px-12 my-4 text-4xl font-extrabold text-gray-200">Latest Products</p>
             <Cards cardInfo={products.slice(-4)} />
         </div>
     )

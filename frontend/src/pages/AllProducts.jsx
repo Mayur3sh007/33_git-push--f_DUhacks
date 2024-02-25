@@ -9,7 +9,7 @@ function Filters({ applyFilter, resetFilters, filterOptions }) {
   const [filterInput, setFilterInput] = useState('');
 
   return (
-    <div className="flex flex-wrap justify-end mb-8 text-white">
+    <div className="flex flex-wrap items justify-end mb-8 text-white">
       <div className="relative mr-2 mb-2">
         <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} className="rounded-lg pl-5 w-60 btn btn-green-500  outline-none h-10 font-extrabold  bg-green-500 hover:bg-green-600 ">
           <option value="">Filter By</option>
@@ -95,18 +95,22 @@ function AllProducts() {
   };
 
   if (!products) {
-    return <div>Loading...</div>; // Render a loading indicator
+    return <div className='text-white'>Loading...</div>; // Render a loading indicator
   }
   return (
-    <div className="bg-black text-gray-300 px-4 py-8">
-      <h1 className="text-4xl font-bold text-green-500 mb-6">Products</h1>
-      <Filters applyFilter={applyFilter} resetFilters={resetFilters} filterOptions={filterOptions} />
-      <div className="">
-        {filteredProducts.map(product => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+    <>
+
+      <div className="bg-black text-gray-300 px-4 py-8">
+        <h1 className="text-4xl font-bold text-green-500 mb-6">Products</h1>
+        <Filters applyFilter={applyFilter} resetFilters={resetFilters} filterOptions={filterOptions} />
+        {filteredProducts.length === 0 && <div className='text-white text-4xl text-center my-4'>No products found</div>}
+        <div className="">
+          {filteredProducts.map(product => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

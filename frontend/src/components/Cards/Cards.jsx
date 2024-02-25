@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 export default function Cards(props) {
     return (
 
-        < div className="flex flex-wrap justify-between px-8 " >
+        < div className="flex flex-col md:flex-row justify-between px-8 " >
             {
                 props.cardInfo.map((card, index) => (
                     <motion.div
@@ -22,14 +22,14 @@ export default function Cards(props) {
                         initial={{ scale: 0.2, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="w-[24%] h-[60vh] bg-gradient-to-r from-gray-800 to-gray-900 p-4 my-3 rounded-xl border-green-300 text-white border shadow-gray-500 shadow-md">
+                        className="w-full md:w-[24%] lg:w-[20%] h-full bg-gradient-to-r from-gray-800 to-gray-900 p-4 my-3 rounded-xl border-green-300 text-white border shadow-gray-500 shadow-md">
                         <Link to={`/productDetails/${card._id}`}>
                             <p className="font-bold text-2xl mx-2">{card.title}</p>
                             <p className="font-bold text-lg mx-2 text-green-300">{card.brand}</p>
 
                             <div className="flex flex-wrap justify-evenly">
-                                <div className="h-[50%] my-4">
-                                    <img src={card.productImage} className="h-full rounded-xl" />
+                                <div className=" my-4">
+                                    <img src={card.productImage} className=" rounded-xl h-full " />
                                     {/* <p className="text-xs">{card.description}</p> */}
                                 </div>
                             </div>

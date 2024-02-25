@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaStar } from 'react-icons/fa';
 
 const ProductCard = ({ product }) => {
   // console.log(product)
@@ -21,6 +22,15 @@ const ProductCard = ({ product }) => {
           <h2 className="text-3xl font-bold mb-2">{product.title}</h2>
           <h2 className="text-xl font-semibold mb-2">by {product.supplier.username}</h2>
           <p className="text-gray-300 mb-4">{product.description}</p>
+          <p className='text-[#ffc107] flex items-center'>
+            <FaStar />
+            <span className='text-white ml-2'>
+              {product.averageRating.toFixed(1) || 0}
+            </span>
+          </p>
+          <p className='text-green-400 my-2'>
+            Carbon Footprint : {product.carbonFP} kgCO2e
+          </p>
           {/* Add more details as needed */}
         </div>
       </div>

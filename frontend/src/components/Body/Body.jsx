@@ -1,5 +1,11 @@
 import Cards from "../Cards/Cards"
+import axios from "axios";
+import { useState, useEffect } from "react";
 import TVimg from "../../assets/logo.png";
+import { useDispatch } from 'react-redux';
+import { setData } from '../../store/productSlice';
+
+
 
 const products = [
     {
@@ -34,11 +40,31 @@ const products = [
 
 ];
 
+
+
 export default function Body() {
+
+    // const dispatch = useDispatch();
+    // const [products, setProducts] = useState(null);
+
+    // useEffect(() => {
+    //     const fetchProducts = async () => {
+    //         try {
+    //             const response = await axios.get('/api/v1/product/getAllProducts');
+    //             setProducts(response.data);
+    //             dispatch(setData(response.data)) //push all products into store
+    //             console.log(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching products:', error);
+    //         }
+    //     };
+
+    //     fetchProducts();
+    // }, []);
 
     if (!products) {
         return (
-            <div className=" py-4 bg-gradient-to-r from-black to-gray-800">
+            <div className="text-white py-4 bg-gradient-to-r from-black to-gray-800">
                 Loading...
             </div>
         )
@@ -47,7 +73,7 @@ export default function Body() {
 
         <div className=" py-4 bg-gradient-to-r from-black to-gray-800 pb-24">
             <p className="px-12 my-4 text-4xl font-extrabold text-gray-200">Latest Products</p>
-            <Cards cardInfo={products.slice(-4)} />
+            <Cards cardInfo={products?.slice(-4)} />
         </div>
     )
 }

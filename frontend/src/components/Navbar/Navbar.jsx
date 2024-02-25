@@ -49,14 +49,13 @@ const DropdownLinks = [
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const supplier = useSelector(state => state.supplier.status);
   const user = useSelector(state => state.user.status);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(user);
-  const supplier = useSelector(state => state.supplier.status);
   const [isSupplierLoggedIn, setIsSupplierLoggedIn] = useState(supplier);
-
-
+  const [text, setText] = useState("");
   
-
   useEffect(() => {
     const checkIfUser = async () => {
       try {
@@ -88,11 +87,6 @@ const Navbar = () => {
     checkIfSupplier();
   }, []);
 
-  console.log(isUserLoggedIn);
-
-
-  const [text, setText] = useState("");
-  const navigate = useNavigate();
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -110,10 +104,18 @@ const Navbar = () => {
     navigate('/user-login')
   };
 
-  const handleLogoutClick = async (e) => {
+  const userHandleLogoutClick = async (e) => {
     e.preventDefault();
     setIsUserLoggedIn(false);
-    const response = axios.get("/api/v1/user/logout")
+    const response = axios.get('/api/v1/user/logout')
+    console.log(response);
+    navigate('/')
+  };
+
+  const supplierHandleLogoutClick = async (e) => {
+    e.preventDefault();
+    setIsSupplierLoggedIn(false);
+    const response = axios.get('/api/v1/supplier/logout')
     console.log(response);
     navigate('/')
   };
@@ -142,29 +144,6 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-              {/* Simple Dropdown and Links */}
-              {/* <li className="group relative cursor-pointer">
-                <a href="#" className="flex items-center gap-[2px] py-2">
-                  Trending Products
-                  <span>
-                    <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
-                  </span>
-                </a>
-                <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
-                  <ul>
-                    {DropdownLinks.map((data) => (
-                      <li key={data.id}>
-                        <a
-                          href={data.link}
-                          className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
-                        >
-                          {data.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </li> */}
             </ul>
           </div>
 
@@ -201,11 +180,20 @@ const Navbar = () => {
               </button>
             )}
 
-
+            
+                      {/* Login Logout buttons */}
             {isUserLoggedIn ? (
               <button
                 type="button"
-                onClick={handleLogoutClick}
+                onClick={userHandleLogoutClick}
+                className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+              >
+                Logout
+              </button>
+            ) : isSupplierLoggedIn ? (
+              <button
+                type="button"
+                onClick={supplierHandleLogoutClick}
                 className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
               >
                 Logout
@@ -220,10 +208,7 @@ const Navbar = () => {
               </button>
             )}
 
-            {/* Darkmode Switch */}
-            {/* <div>
-              <DarkMode />
-            </div> */}
+
           </div>
         </div>
       </div>

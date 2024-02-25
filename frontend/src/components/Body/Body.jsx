@@ -57,7 +57,7 @@ export default function Body() {
                 console.error('Error fetching products:', error);
             }
         };
-
+        
         fetchProducts();
     }, []);
 

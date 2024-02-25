@@ -53,15 +53,14 @@ function ProductDetails() {
     console.log(foundSupplierName);
     if (foundSupplierName) {
       const options = {
-        method: "GET",
-        url: "/scores",
+        method: 'GET',
+        url: '/scores',
         params: {
           companyname: "Apple Inc.", // Use the foundSupplierName here
         },
         headers: {
-          "X-RapidAPI-Key":
-            "9329084790msha4ae54f44c1c13fp17db99jsn44903bcc0b04",
-          "X-RapidAPI-Host": "gaialens-company-names.p.rapidapi.com",
+          'X-RapidAPI-Key': '33ef4a6069mshe660049d750690bp197a5bjsncc2df2cdb993',
+          'X-RapidAPI-Host': 'gaialens-esg-scores.p.rapidapi.com'
         },
       };
 

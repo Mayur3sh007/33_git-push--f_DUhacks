@@ -17,6 +17,8 @@ import PostForm from './pages/PostForm.jsx'
 import AllProducts from './pages/AllProducts.jsx'
 import ProductDetails from './components/ProdDetails/ProductDetails.jsx'
 import SearchResults from './pages/SearchResults.jsx'
+import Category from './pages/Category.jsx'
+import CategoryPage from './pages/CategoryPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: "/search/:slug",
         element: <SearchResults />
+      },
+      {
+        path: "/category",
+        element: <Category />
+      },
+      {
+        path: "/category/:slug",
+        element: <CategoryPage />
       },
     ]
   }

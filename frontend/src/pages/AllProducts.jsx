@@ -1,11 +1,9 @@
-// Filter component
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../components/Cards/ProductCard';
 import axios from 'axios';
 import { setData } from '../store/productSlice';
 
-// Filter compone
 function Filters({ applyFilter, resetFilters, filterOptions }) {
   const [selectedOption, setSelectedOption] = useState('');
   const [filterInput, setFilterInput] = useState('');
@@ -99,7 +97,6 @@ function AllProducts() {
   if (!products) {
     return <div>Loading...</div>; // Render a loading indicator
   }
-
   return (
     <div className="bg-black text-gray-300 px-4 py-8">
       <h1 className="text-4xl font-bold text-green-500 mb-6">Products</h1>

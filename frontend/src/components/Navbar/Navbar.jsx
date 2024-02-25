@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from "../../store/userSlice";
-import {setSupplier} from "../../store/supplierSlice"
+import { setSupplier } from "../../store/supplierSlice"
 import axios from "axios";
 
 const Menu = [
@@ -55,7 +55,7 @@ const Navbar = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(user);
   const [isSupplierLoggedIn, setIsSupplierLoggedIn] = useState(supplier);
   const [text, setText] = useState("");
-  
+
   useEffect(() => {
     const checkIfUser = async () => {
       try {
@@ -70,22 +70,22 @@ const Navbar = () => {
     };
 
     checkIfUser();
-  }, []);
+  }, [user, setIsUserLoggedIn]);
 
-  useEffect(() => {
-    const checkIfSupplier = async () => {
-      try {
-        const response = await axios.get('/api/v1/supplier/getsupplier');
-        dispatch(setSupplier(response.data))
-        setIsSupplierLoggedIn(response.status === 200)
-        console.log("Supplier LOGGED IN as: ", response.data);
-      } catch (error) {
-        console.error("Supplier is Not Logged IN:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const checkIfSupplier = async () => {
+  //     try {
+  //       const response = await axios.get('/api/v1/supplier/getsupplier');
+  //       dispatch(setSupplier(response.data))
+  //       setIsSupplierLoggedIn(response.status === 200)
+  //       console.log("Supplier LOGGED IN as: ", response.data);
+  //     } catch (error) {
+  //       console.error("Supplier is Not Logged IN:", error);
+  //     }
+  //   };
 
-    checkIfSupplier();
-  }, []);
+  //   checkIfSupplier();
+  // }, []);
 
 
   const formHandler = (e) => {
@@ -180,8 +180,8 @@ const Navbar = () => {
               </button>
             )}
 
-            
-                      {/* Login Logout buttons */}
+
+            {/* Login Logout buttons */}
             {isUserLoggedIn ? (
               <button
                 type="button"

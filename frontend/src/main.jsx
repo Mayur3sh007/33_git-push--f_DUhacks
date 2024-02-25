@@ -19,6 +19,7 @@ import ProductDetails from './components/ProdDetails/ProductDetails.jsx'
 import SearchResults from './pages/SearchResults.jsx'
 import Category from './pages/Category.jsx'
 import CategoryPage from './pages/CategoryPage.jsx'
+import ProfileDetails from './components/ProfileDetails/ProfileDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
         path: "/category/:slug",
         element: <CategoryPage />
       },
+      {
+        path: "/P",
+        element: <ProfileDetails />
+      }
     ]
   }
 ])

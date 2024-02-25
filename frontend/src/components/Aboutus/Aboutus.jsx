@@ -12,8 +12,8 @@ const profiles = [
 
 const Aboutus = () => {
     return (
-        <div className="bg-gradient-to-r from-black to-gray-800 min-h-screen flex justify-center items-center">
-            <div className="max-w-4xl bg-gradient-to-r  from-gray-700 to-black text-white rounded-lg p-10 gap-7 flex flex-col border-green-300 border-2 shadow-green-500 shadow-2xl backdrop-blur-3xl">
+        <div className="bg-gray-900 min-h-screen flex justify-center items-center">
+            <div className="max-w-4xl bg-gray-950 text-white rounded-3xl p-10 gap-7 flex flex-col shadow-2xl backdrop-blur-3xl">
                 {profiles.map((profile, index) => (
 
                     <div key={index} className="">

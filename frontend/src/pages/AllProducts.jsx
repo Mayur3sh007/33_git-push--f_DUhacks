@@ -14,7 +14,7 @@ function Filters({ applyFilter, resetFilters, filterOptions }) {
         <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} className="rounded-lg pl-5 w-60 btn btn-green-500  outline-none h-10 font-extrabold  bg-green-500 hover:bg-green-600 ">
           <option value="">Filter By</option>
           {filterOptions.map(option => (
-            <option key={option.key} value={option.key} className='hover:bg-black text-lg text-white ' >{option.label}</option>
+            <option key={option.key} value={option.key} className='hover:bg-gray-950 text-lg text-white ' >{option.label}</option>
           ))}
         </select>
         <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none bg-gray-900 rounded-e-lg ">
@@ -100,8 +100,8 @@ function AllProducts() {
   return (
     <>
 
-      <div className="bg-black text-gray-300 px-4 py-8">
-        <h1 className="text-4xl font-bold text-green-500 mb-6">Products</h1>
+      <div className="bg-gray-950 text-gray-300 px-4 py-8">
+        <h1 className="text-4xl font-bold text-green-500 mb-6 ml-[66px]">Products</h1>
         <Filters applyFilter={applyFilter} resetFilters={resetFilters} filterOptions={filterOptions} />
         {filteredProducts.length === 0 && <div className='text-white text-4xl text-center my-4'>No products found</div>}
         <div className="">

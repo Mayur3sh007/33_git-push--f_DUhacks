@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 function Hero() {
 
     return (
-        <div className='bg-gradient-to-r from-black to-gray-900 px-12 h-screen flex flex-col items-center my-auto'>
+        <div className='bg-gray-950 px-12 h-screen flex flex-col items-center my-auto'>
             <div className="py-10">
                 <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
                     <div className="flex flex-col w-full justify-center items-start p-8">

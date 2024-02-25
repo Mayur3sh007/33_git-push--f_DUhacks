@@ -5,12 +5,12 @@ const categoriesEnum = ["Electronics", "Clothing", "Food&Beverages", "Home", "Be
 
 const Category = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">Categories</h1>
-      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    <div className="bg-gray-950 container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-200 m-4 text-center">Categories</h1>
+      <ul className="flex flex-wrap justify-center">
         {categoriesEnum.map(category => (
-          <li key={category} className="bg-white rounded-lg shadow-md">
-            <Link to={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`} className="block py-4 px-6 text-lg font-medium text-gray-800 hover:bg-gray-100">{category}</Link>
+          <li key={category} className="bg-gray-800 w-[25%] m-4 rounded-lg shadow-md hover:bg-gray-900">
+            <Link to={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`} className="block py-4 px-6 text-lg font-medium text-gray-300 ">{category}</Link>
           </li>
         ))}
       </ul>

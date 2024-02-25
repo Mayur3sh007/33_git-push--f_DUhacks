@@ -131,7 +131,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="shadow-md bg-white dark:bg-gray-950 dark:text-white duration-200 relative z-40 px-4">
+    <div className="shadow-md bg-gray-950 text-white duration-200 relative z-40 px-4">
       {/* upper Navbar */}
       <div className="bg-primary/40 py-3">
         <div className="container flex justify-between items-center mx-auto">

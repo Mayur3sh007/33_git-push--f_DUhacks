@@ -26,7 +26,7 @@ function CategoryPage() {
   }, [slug, products]);
 
   return (
-    <div className="bg-black text-gray-300 px-4 py-8">
+    <div className="bg-gray-900 text-gray-300 px-4 py-8">
       <h1 className="text-4xl font-bold text-green-500 mb-6">{slug} Products</h1>
       <div className="">
         {filteredProducts.map(product => (

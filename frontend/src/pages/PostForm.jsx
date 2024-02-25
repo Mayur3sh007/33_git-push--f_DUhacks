@@ -100,8 +100,8 @@ function PostForm() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-black to-gray-900 text-white min-h-screen flex flex-col justify-center px-10">
-      <h1 className="text-6xl mb-6 text-green-500 mx-24">Create New Product</h1>
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center px-10 py-12">
+      <h1 className="text-6xl mb-6 font-semibold text-green-500 mx-24">Create New Product</h1>
 
       <form
         onSubmit={handleSubmit}
@@ -161,6 +161,45 @@ function PostForm() {
               />
             </div>
 
+
+
+            <div className="mb-4">
+              <label htmlFor="productLink" className="block mb-1 text-white">
+                Buy Product Link:
+              </label>
+              <input
+                type="url"
+                id="productLink"
+                name="productLink"
+                placeholder="This link will be displayed to the customer wanting to buy this product"
+                value={formData.productLink}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="category" className="block mb-1 text-white">
+                Category:
+              </label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              >
+                {categoriesEnum.map((category, index) => (
+                  <option key={index} value={category} className="bg-[#080b12]">
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+
             {/* Supply chain fields */}
             {formData.supplyChain.map((item, index) => (
               <div key={index}>
@@ -200,43 +239,6 @@ function PostForm() {
                 </div>
               </div>
             ))}
-
-            <div className="mb-4">
-              <label htmlFor="productLink" className="block mb-1 text-white">
-                Buy Product Link:
-              </label>
-              <input
-                type="url"
-                id="productLink"
-                name="productLink"
-                placeholder="This link will be displayed to the customer wanting to buy this product"
-                value={formData.productLink}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
-                required
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="category" className="block mb-1 text-white">
-                Category:
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
-                required
-              >
-                {categoriesEnum.map((category, index) => (
-                  <option key={index} value={category} className="bg-[#080b12]">
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-
 
             {/* Button to add more supply chain items */}
             <div className="mb-4">

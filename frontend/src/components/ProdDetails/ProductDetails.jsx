@@ -125,9 +125,9 @@ function ProductDetails() {
       {product && (
         <div className="w-full h-[400px] flex items-center mt-12 px-12">
           <div className="w-[40vw] h-full p-3 flex items-center justify-center">
-            <img src={product?.productImage} alt={product?.title} className="rounded-2xl" />
+            <img src={product?.productImage} alt={product?.title} className="rounded-2xl w-96" />
           </div>
-          <div className="w-[30%] h-full flex flex-col">
+          <div className="w-[30%] h-full flex flex-col justify-center">
             <h1 className="text-4xl font-extrabold text-left mx-8 mb-2 mt-8">{product?.title}</h1>
             {/* <h1 className="text-3xl text-orange-400 font-extrabold text-left mx-8 my-2">{product?.brand}</h1> */}
             <p className="m-8 text-lg">{product?.description}</p>
@@ -167,7 +167,7 @@ function ProductDetails() {
 
       <div className='w-full px-14'>
         <div className="w-full">
-          <div className="container max-w-2xl mx-auto p-4 mt-12 mb-20 relative">
+          <div className="container w-[80%] mx-auto p-4 mt-12 mb-20 relative">
             <h1 className="text-3xl font-bold mb-8 text-center text-orange-400">Product Journey</h1>
             <div className="timeline-container">
               <SupplyChain supplyChain={product?.supplyChain} />
@@ -178,7 +178,7 @@ function ProductDetails() {
 
 
 
-      <div className='bg-gray-950 w-full px-14'>
+      <div className='bg-gray-950 w-full px-14 my-4'>
 
 
         {user ? (
@@ -232,7 +232,7 @@ function ProductDetails() {
             </div>
           </form>
         ) : (
-          <div className="mt-8 text-2xl font-semibold">
+          <div className="mt-8 pt-8 text-2xl font-semibold">
             Please log in to leave a review.
           </div>
         )}
@@ -253,7 +253,7 @@ function ProductDetails() {
         </ul> */}
 
           {comments.map((comment, idx) => (
-            <div key={idx} className='flex mb-4 rounded-lg p-3 bg-gray-800'>
+            <div key={idx} className='flex mt-4 rounded-lg p-3 bg-gray-800'>
               <div className=''>
                 <img src={comment.user.avatar} alt="" className='w-32 rounded-lg' />
                 <p className='text-center'>{comment.user.username}</p>

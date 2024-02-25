@@ -1,7 +1,7 @@
 
 const SupplyChainItem = ({ data, index }) => (
   <div
-    className={`timeline-item flex items-start mb-12 w-[40%] bg-gray-700 rounded p-4 text-gray-200 ${index % 2 === 0 ? "ml-[60%]" : "mr-[60%]"}`}
+    className={`rounded-full timeline-item flex items-start mb-12 w-[45%] bg-gray-700 p-6 text-gray-200 ${index % 2 === 0 ? "ml-[55%] " : "mr-[55%] "}`}
   >
     <i className={`fas fa-circle text-yellow-400 mr-4 mt-4`} />
     <div className="timeline-item-content">

@@ -14,14 +14,13 @@ function ProductDetails() {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [foundSupplierName, setFoundSupplierName] = useState('');
+  const [supplierData, setSupplierData] = useState(null); // State to store supplier data
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const response = await axios.get(`/api/v1/review/getByProductId/${slug}`);
         setComments(response.data.reviews); 
-        
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
@@ -41,14 +40,15 @@ function ProductDetails() {
     }
   }, [products, navigate, slug]);
 
-  // Make API call using the foundSupplierName
+
+
   useEffect(() => {
     if (foundSupplierName) {
       const options = {
         method: 'GET',
         url: '/scores',
         params: {
-          companyname: foundSupplierName// Use the foundSupplierName here
+          companyname: 'Apple Inc.' // Use the foundSupplierName here
         },
         headers: {
           'X-RapidAPI-Key': '33ef4a6069mshe660049d750690bp197a5bjsncc2df2cdb993',
@@ -59,7 +59,8 @@ function ProductDetails() {
       const fetchSupplierData = async () => {
         try {
           const response = await axios.request(options);
-          console.log(response.data);
+          setSupplierData(response.data); // Store the supplier data
+          console.log(supplierData)
         } catch (error) {
           console.error(error);
         }
@@ -113,23 +114,28 @@ function ProductDetails() {
         </div>
       )}
 
+      {/* Render Supplier Data */}
+
+      {supplierData && supplierData.length > 0 && (
+        <div className="mt-8 text-white p-4">
+          <h3 className="text-4xl font-bold mb-4">Supplier Information:</h3>
+          <p>Company Name: {supplierData[0].companyname}</p>
+          <p>Country: {supplierData[0].country}</p>
+          <p>Environmental Pillar Score: {supplierData[0]['Environmental Pillar Score']}</p>
+          <p>Governance Pillar Score: {supplierData[0]['Governance Pillar Score']}</p>
+          <p>Latest Score Date: {supplierData[0]['Latest Score Date']}</p>
+        </div>
+      )}
+
+
+
+
       {user ? (
         <form onSubmit={handleSubmitReview} className="w-[80%] mx-auto mt-16 p-4  text-white shadow rounded">
           <h2 className="text-6xl font-bold mb-12 text-center">Reviews</h2>
   
           <div className="flex items-center mt-7 space-x-9">
-
-            <input type="radio" name="rating" id="rating1" value="1" className="focus:outline-none focus:ring-2 focus:ring-blue-500 w-6 h-6" onChange={handleRatingChange} />
-            <label htmlFor="rating1" className='text-2xl'>1</label>
-            <input type="radio" name="rating" id="rating2" value="2" className="focus:outline-none focus:ring-2 focus:ring-blue-500 w-6 h-6" onChange={handleRatingChange} />
-            <label htmlFor="rating2" className='text-2xl'>2</label>
-            <input type="radio" name="rating" id="rating3" value="3" className="focus:outline-none focus:ring-2 focus:ring-blue-500 w-6 h-6" onChange={handleRatingChange} />
-            <label htmlFor="rating3" className='text-2xl'>3</label>
-            <input type="radio" name="rating" id="rating4" value="4" className="focus:outline-none focus:ring-2 focus:ring-blue-500 w-6 h-6" onChange={handleRatingChange} />
-            <label htmlFor="rating4" className='text-2xl'>4</label>
-            <input type="radio" name="rating" id="rating5" value="5" className="focus:outline-none focus:ring-2 focus:ring-blue-500 w-6 h-6" onChange={handleRatingChange} />
-            <label htmlFor="rating5" className='text-2xl'>5</label>
-
+            {/* Render rating inputs */}
           </div>
           <div className="mb-4">
             <label htmlFor="message" className="block text-3xl mb-1 ">Message</label>

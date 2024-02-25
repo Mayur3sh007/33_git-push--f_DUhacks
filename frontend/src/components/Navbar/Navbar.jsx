@@ -72,20 +72,20 @@ const Navbar = () => {
     checkIfUser();
   }, [user, setIsUserLoggedIn]);
 
-  // useEffect(() => {
-  //   const checkIfSupplier = async () => {
-  //     try {
-  //       const response = await axios.get('/api/v1/supplier/getsupplier');
-  //       dispatch(setSupplier(response.data))
-  //       setIsSupplierLoggedIn(response.status === 200)
-  //       console.log("Supplier LOGGED IN as: ", response.data);
-  //     } catch (error) {
-  //       console.error("Supplier is Not Logged IN:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const checkIfSupplier = async () => {
+      try {
+        const response = await axios.get('/api/v1/supplier/getsupplier');
+        dispatch(setSupplier(response.data))
+        setIsSupplierLoggedIn(response.status === 200)
+        console.log("Supplier LOGGED IN as: ", response.data);
+      } catch (error) {
+        console.error("Supplier is Not Logged IN:", error);
+      }
+    };
 
-  //   checkIfSupplier();
-  // }, []);
+    checkIfSupplier();
+  }, [supplier, setIsSupplierLoggedIn]);
 
 
   const formHandler = (e) => {
@@ -181,7 +181,7 @@ const Navbar = () => {
 
 
             {/* Login Logout buttons */}
-            {isUserLoggedIn ? (
+            {/* {isUserLoggedIn ? (
               <button
                 type="button"
                 onClick={userHandleLogoutClick}
@@ -205,8 +205,27 @@ const Navbar = () => {
               >
                 Login
               </button>
-            )}
+            )} */}
 
+            {
+              isUserLoggedIn || isSupplierLoggedIn ? (
+                <button
+                  type="button"
+                  onClick={isUserLoggedIn ? userHandleLogoutClick : supplierHandleLogoutClick}
+                  className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleLoginClick}
+                  className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+                >
+                  Login
+                </button>
+              )
+            }
 
           </div>
         </div>

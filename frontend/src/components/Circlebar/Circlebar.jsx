@@ -46,7 +46,7 @@ function CircularProgressBar({ rating }) {
             <div style={{ width: '150px', marginLeft: 'auto', marginRight: 'auto' }}>
                 <CircularProgressbar
                     value={percentage}
-                    text={`${rating.toFixed(2)}/5`}
+                    text={`${rating.toFixed(1)}/5`}
                     styles={customStyles} />
             </div>
             <p className='text-green-400'>Average Rating</p>

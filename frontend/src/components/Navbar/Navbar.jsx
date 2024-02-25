@@ -147,8 +147,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-
-
+          
           {/* search bar */}
 
           <div className="flex justify-between items-center gap-4">

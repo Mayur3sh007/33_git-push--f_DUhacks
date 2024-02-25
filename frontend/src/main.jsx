@@ -16,6 +16,7 @@ import SupplierRegister from './pages/SupplierRegister.jsx'
 import PostForm from './pages/PostForm.jsx'
 import AllProducts from './pages/AllProducts.jsx'
 import ProductDetails from './components/ProdDetails/ProductDetails.jsx'
+import SearchResults from './pages/SearchResults.jsx'
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,11 @@ const router = createBrowserRouter([
       {
         path: "productDetails/:slug",
         element: <ProductDetails />
-      }
+      },
+      {
+        path: "/search/:slug",
+        element: <SearchResults />
+      },
     ]
   }
 ])

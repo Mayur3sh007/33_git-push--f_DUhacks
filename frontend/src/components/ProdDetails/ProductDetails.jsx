@@ -222,7 +222,12 @@ function ProductDetails() {
 
 
       <div className="mt-8">
-        <h3 className="text-4xl font-bold mb-4" id='comments'>Comments:</h3>
+        {comments.length === 0 ?
+          <h3 className="text-4xl font-bold mb-12" id='comments'>No comments yet</h3>
+          :
+          <h3 className="text-4xl font-bold mb-4" id='comments'>Comments:</h3>
+        }
+
         {/* <ul>
           {comments.map((comment, index) => (
             <li key={index}>{comment.comment} R: {comment.rating}</li>

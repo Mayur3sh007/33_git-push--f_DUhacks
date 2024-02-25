@@ -1,28 +1,22 @@
 import mongoose, { Schema } from "mongoose";
-import {Supplier} from "../models/supplier.model.js"
 
 
-const supplyChainSchema = new mongoose.Schema(
-  {
-    title: String,
-    description: String
-  }
-
-);
+const supplyChainSchema = new mongoose.Schema({
+  title: String,
+  description: String
+});
 
 const categoriesEnum = ["Electronics", "Clothing", "Food&Beverages", "Home", "Beauty", "Books", "Sports", "Toys"];
 
 const productSchema = new Schema(
   {
-    supplyChain: {
-      type: supplyChainSchema, // Reference to the supplyChainSchema
-    },
+    supplyChain: [supplyChainSchema],
     productImage: {
-      type: String, //cloudinary url
+      type: String, 
       required: true,
     },
     certification: {
-      type: String, //cloudinary url
+      type: String, 
       required: true,
     },
     productLink: { 
@@ -40,11 +34,11 @@ const productSchema = new Schema(
     },
     description: {
       type: String,
-      required: true,
+      
     },
     carbonFP: {
       type: Number,
-      required: true,
+      
     },
     averageRating: {
       type: Number,
@@ -53,7 +47,6 @@ const productSchema = new Schema(
     category: {
       type: String,
       enum: categoriesEnum,
-      required: true
     }
   },
   { timestamps: true }

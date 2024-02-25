@@ -12,7 +12,8 @@ const createProduct = asyncHandler(async (req, res) => {
     description,
     category,
     supplier,
-    carbonFP
+    carbonFP,
+    supplyChain
   } = req.body;
 
   const productImageLocalPath = req.files?.productImage[0]?.path;
@@ -32,7 +33,7 @@ const createProduct = asyncHandler(async (req, res) => {
     description,
     productImage: productImage?.url || "",
     certification: certification?.url || "",
-    supplyChain: null,
+    supplyChain,
     productLink,
     category,
     supplier,

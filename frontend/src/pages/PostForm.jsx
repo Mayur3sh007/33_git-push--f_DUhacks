@@ -5,16 +5,25 @@ import { useSelector } from "react-redux";
 
 function PostForm() {
   const supplier = useSelector((state) => state.supplier);
+  const navigate = useNavigate();
+
+  // console.log(supplier.data._id)
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    supplyChain: [],
     productImage: null,
     imagePreview: null,
-    supplier: supplier.data?._id,
-    buyproductlink: "",
+    certification: null,
+    certificationPreview: null, 
+    supplyChain: [],
+    productLink: "",
+    category:"Toys",
+    supplier: supplier.data.data?._id,
+    carbonFP:0,
+  
   });
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +37,15 @@ function PostForm() {
     setFormData({ ...formData, supplyChain: updatedSupplyChain });
   };
 
+  const handleCertImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFormData({
+      ...formData,
+      certification: imageFile,
+      certificationPreview : URL.createObjectURL(imageFile),
+    });
+  };
+
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setFormData({
@@ -37,14 +55,20 @@ function PostForm() {
     });
   };
 
-  const navigate = useNavigate();
+  const addSupplyChainItem = () => {
+    setFormData({
+      ...formData,
+      supplyChain: [...formData.supplyChain, { title: "", description: "" }],
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     delete formData.imagePreview;
     try {
+      console.log(formData)
       const response = await axios.post(
-        '/api/product/createProduct',
+        '/api/v1/product/createProduct',
         formData,
         {
           headers: {
@@ -52,20 +76,13 @@ function PostForm() {
           },
         }
       );
-
+        
       alert(response.data.message);
       navigate("/");
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while submitting the form");
     }
-  };
-
-  const addSupplyChainItem = () => {
-    setFormData({
-      ...formData,
-      supplyChain: [...formData.supplyChain, { title: "", description: "" }],
-    });
   };
 
   if (!supplier.status) {
@@ -114,6 +131,48 @@ function PostForm() {
               />
             </div>
 
+
+            {/* Certification */}
+            <div className="mb-4 w-full">
+              <label htmlFor="certification" className="block mb-1 text-white">
+                Upload Valid Certificate Image:
+              </label>
+              <input
+                type="file"
+                id="certification"
+                name="certification"
+                accept="image/*"
+                onChange={handleCertImageChange}
+                className="w-full border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              />
+              {/* Display image preview */}
+              {formData.certificationPreview && (
+                <img
+                  src={formData.certificationPreview}
+                  alt="Product Preview"
+                  className="mt-2 max-w-[180px] mx-auto"
+                />
+              )}
+            </div>
+
+                {/* Carbon FP */}
+            <div className="mb-4">
+              <label htmlFor="carbonFP" className="block mb-1 text-white">
+                Carbon Footprint:
+              </label>
+              <input
+                type="number"
+                id="carbonFP"
+                name="carbonFP"
+                placeholder="Total number"
+                value={formData.carbonFP}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              />
+            </div>
+
             {/* Supply chain fields */}
             {formData.supplyChain.map((item, index) => (
               <div key={index}>
@@ -154,22 +213,6 @@ function PostForm() {
               </div>
             ))}
 
-            <div className="mb-4">
-              <label htmlFor="buyproductlink" className="block mb-1 text-white">
-                Buy Product Link:
-              </label>
-              <input
-                type="url"
-                id="buyproductlink"
-                name="buyproductlink"
-                placeholder="This link will be displayed to the customer wanting to buy this product"
-                value={formData.buyproductlink}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
-                required
-              />
-            </div>
-
             {/* Button to add more supply chain items */}
             <div className="mb-4">
               <button
@@ -181,6 +224,26 @@ function PostForm() {
               </button>
             </div>
           </div>
+
+            <div className="mb-4">
+              <label htmlFor="productLink" className="block mb-1 text-white">
+                Buy Product Link:
+              </label>
+              <input
+                type="url"
+                id="productLink"
+                name="productLink"
+                placeholder="This link will be displayed to the customer wanting to buy this product"
+                value={formData.productLink}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-400 bg-gradient-to-r from-gray-900 to-black rounded"
+                required
+              />
+            </div>
+
+            
+
+
 
           <div className="w-[40%]">
             <div className="mb-4 w-full">

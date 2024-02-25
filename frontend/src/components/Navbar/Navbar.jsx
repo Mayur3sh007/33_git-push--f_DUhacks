@@ -96,7 +96,7 @@ const Navbar = () => {
 
   const handleUploadClick = async (e) => {
     e.preventDefault();
-    navigate('/productform')
+    navigate('/postForm')
   };
 
   const handleLoginClick = async (e) => {
